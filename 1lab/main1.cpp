@@ -171,7 +171,7 @@ Vertex *IDSP(const int array[], int l, int r)
 
 int main()
 {
-    const int n = 100;
+    int n = 100;
     int arr[n];
     for (int i = 0; i < n; ++i)
     {
