@@ -163,7 +163,7 @@ Vertex *IDSP(const int array[], int l, int r)
     }
     else
     {
-        int m = (int)ceil((double)(l + r) / 2);
+        int m = ((double)(l + r) / 2);
         auto p = addVertex(array[m], IDSP(array, l, m - 1), IDSP(array, m + 1, r));
         return p;
     }
@@ -171,7 +171,7 @@ Vertex *IDSP(const int array[], int l, int r)
 
 int main()
 {
-    int n = 100;
+    const int n = 20;
     int arr[n];
     for (int i = 0; i < n; ++i)
     {

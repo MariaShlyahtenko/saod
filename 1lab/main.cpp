@@ -87,14 +87,14 @@ void ISDP(int L, int R, node *&p, int *a)
 
 int main()
 {
-    const int n = 100;
+    const int n = 20;
     int arr[n];
     for (int i = 0; i < n; ++i)
     {
         arr[i] = i;
     }
     node *p = NULL;
-    ISDP(0, 99, p, arr);
+    ISDP(0, 19, p, arr);
     showInfo(p);
     print(p);
 }
