@@ -4,7 +4,7 @@ using namespace std;
 struct node
 {
     int data;
-    node *left, *right;
+    node *left = NULL, *right = NULL;
 };
 
 void print(node *p)
@@ -84,17 +84,46 @@ void ISDP(int L, int R, node *&p, int *a)
         ISDP(m + 1, R, p->right, a);
     }
 }
+void serch(node *p, int x)
+{
 
+    while (p)
+    {
+        if (x < p->data)
+        {
+            p = p->left;
+        }
+
+        if (x > p->data)
+        {
+            p = p->right;
+        }
+        if (!p)
+            break;
+        if (x == p->data)
+            break;
+    }
+
+    if (p)
+        cout << "Vershina naidena po adresy " << p << endl;
+    else
+        cout << "Vershini net v dereve" << endl;
+}
 int main()
 {
-    const int n = 20;
+
+    const int n = 100;
     int arr[n];
     for (int i = 0; i < n; ++i)
     {
         arr[i] = i;
     }
     node *p = NULL;
-    ISDP(0, 19, p, arr);
+
+    ISDP(0, 99, p, arr);
+
+    int x;
+    cin >> x;
+    serch(p, x);
     showInfo(p);
-    print(p);
 }
