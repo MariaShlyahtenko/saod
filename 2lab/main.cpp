@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <iomanip>
 using namespace std;
 struct node
 {
@@ -7,15 +8,15 @@ struct node
     node *left = NULL, *right = NULL;
 };
 
-void print(node *p)
-{
-    if (p)
-    {
-        print(p->left);
-        cout << p->data << " ";
-        print(p->right);
-    }
-}
+// void print(node *p)
+// {
+//     if (p)
+//     {
+//         print(p->left);
+//         cout << p->data << " ";
+//         print(p->right);
+//     }
+// }
 
 double sum_lens_way(node *p, int z)
 {
@@ -150,6 +151,24 @@ node *CDPrec(node *&root, int D)
     }
     return root;
 }
+//рисунок дерева
+void print(node *p, int l)
+{
+    if (p != NULL)
+    {
+
+        if (p->left)
+            print(p->left, l + 2);
+        cout << p->data << "\n ";
+        if (p->right)
+            print(p->right, l + 2);
+
+        if (l)
+        {
+            std::cout << setw(l) << ' ';
+        }
+    }
+}
 //исдп
 void ISDP(int L, int R, node *&p, int *a)
 {
@@ -169,7 +188,7 @@ int main()
     srand(time(0));
     node *p = NULL;
     node *v;
-    const int n = 100;
+    const int n = 20;
     int arr[n];
     for (int i = 0; i < n; ++i)
     {
@@ -183,7 +202,7 @@ int main()
          << "Visota"
          << "    "
          << "Sredn visota" << endl;
-    ISDP(0, 99, p, arr);
+    ISDP(0, 19, p, arr);
     cout << "ISDP"
          << "   ";
     showInfo(p);
@@ -191,6 +210,8 @@ int main()
     cout << "SDP"
          << "    ";
     showInfo(p);
+    print(p, 0);
+
     // cout << endl;
     // for (int i = 0; i < n; ++i)
     // {
