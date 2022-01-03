@@ -1,22 +1,24 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
+
 using namespace std;
 struct node
 {
     int data;
-    node *left = NULL, *right = NULL;
+    node *left, *right;
 };
 
-// void print(node *p)
-// {
-//     if (p)
-//     {
-//         print(p->left);
-//         cout << p->data << " ";
-//         print(p->right);
-//     }
-// }
+void print(node *p)
+{
+    if (p)
+    {
+
+        print(p->left);
+        cout << p->data << " ";
+        print(p->right);
+    }
+}
 
 double sum_lens_way(node *p, int z)
 {
@@ -69,7 +71,7 @@ int tree_height(node *p)
 void showInfo(node *root)
 {
     cout << "    " << check_size(root) << "      " << check_sum(root) << "         " << tree_height(root) + 1 << "         " << mid_hight(root) << endl;
-    // print(root);
+    print(root);
 }
 //поиск
 void serch(node *p, int x)
@@ -100,10 +102,10 @@ void serch(node *p, int x)
 }
 
 //сдп с двойной косвенностью
-node *CDP2(node **root, int *D, int n)
+node *CDP2(node **root, int *D)
 {
     node **p = root;
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < 100; i++)
     {
         node **p = root;
         while ((*p) != NULL)
@@ -151,24 +153,7 @@ node *CDPrec(node *&root, int D)
     }
     return root;
 }
-//рисунок дерева
-void print(node *p, int l)
-{
-    if (p != NULL)
-    {
 
-        if (p->left)
-            print(p->left, l + 2);
-        cout << p->data << "\n ";
-        if (p->right)
-            print(p->right, l + 2);
-
-        if (l)
-        {
-            std::cout << setw(l) << ' ';
-        }
-    }
-}
 //исдп
 void ISDP(int L, int R, node *&p, int *a)
 {
@@ -183,17 +168,58 @@ void ISDP(int L, int R, node *&p, int *a)
         ISDP(m + 1, R, p->right, a);
     }
 }
+// void printtree(node *p,node *v ,int l)
+// {
+//     if (p)
+//     {
+//         if (p->left )
+//         cout << setw(l) << p->data << ' ' << endl;
+//         printtree(p->left, l - 2);
+//         if (p->right->data > p->left->data && l < 20)
+//         {
+//             l += 2;
+//         }
+//         printtree(p->right, l - 2);
+//     }
+// }
+void printtree(node *p, int space)
+{
+
+    if (p == NULL)
+        return;
+
+    space += 1;
+
+    printtree(p->right, space);
+
+    cout << endl;
+    for (int i = 0; i < space; i++)
+        cout << " ";
+    cout << p->data << "\n";
+
+    printtree(p->left, space);
+}
 int main()
 {
-    srand(time(0));
     node *p = NULL;
-    node *v;
-    const int n = 20;
+    const int n = 100;
     int arr[n];
-    for (int i = 0; i < n; ++i)
+
+    for (int i = 0; i < n; i++)
     {
         arr[i] = rand() % 1000;
+        for (int j = 0; j < i; j++)
+        {
+            if (arr[j] == arr[i])
+            {
+                while (arr[j] == arr[i])
+                {
+                    arr[i] = rand() % 1000;
+                }
+            }
+        }
     }
+
     cout << "n=" << n << "    "
          << "Razmer"
          << "    "
@@ -202,22 +228,26 @@ int main()
          << "Visota"
          << "    "
          << "Sredn visota" << endl;
-    ISDP(0, 19, p, arr);
+    ISDP(0, 99, p, arr);
     cout << "ISDP"
          << "   ";
     showInfo(p);
-    p = CDP2(&p, arr, n);
+    cout << endl;
+    p = NULL;
+    p = CDP2(&p, arr);
     cout << "SDP"
          << "    ";
     showInfo(p);
-    print(p, 0);
+    cout << endl;
+    // printtree(p, 0);
+    // print(v);
 
     // cout << endl;
     // for (int i = 0; i < n; ++i)
     // {
     //     v = CDPrec(p, arr[i]);
     // }
-    int x;
+    // int x;
     //cin >> x;
     //serch(p, x);
 }

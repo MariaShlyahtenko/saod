@@ -284,7 +284,7 @@ int BinarySearch2(record *arr[], queue *top)
     char str2[4] = {};
     str[3] = '\0';
     cout << "Vvedite 3 bykvi FIO ";
-    //cin >> str;
+
     for (int i = 0; i < 3; i++)
     {
         cin >> str[i];
@@ -760,14 +760,12 @@ int main()
         }
     }
 
-    cout << "Naiti ? 1\n Coding? 2\n Exit? 0 ";
+    cout << " Naiti ? 1\n Coding ? 2\n Exit ? 0 ";
     cin >> c;
-    // p = head;
     if (c == 1)
     {
 
         make_index_array(arr, v);
-
         queue *tops = new queue;
         init(tops);
         int num = BinarySearch2(arr, tops);
@@ -775,11 +773,8 @@ int main()
         int mk = number(tops, num);
         record *arr1[4000];
         make_index_array_q(arr1, v1, mk);
-
         Vertex *root = nullptr;
         List *h = new List;
-        /*  h = tops->top;
-    add_to_avl(root, h);*/
         for (int i = 0; i < mk; i++)
         {
 

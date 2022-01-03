@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <iomanip>
 using namespace std;
 struct node
 {
@@ -7,13 +8,32 @@ struct node
     node *left = NULL, *right = NULL;
 };
 
-void print(node *p)
+// void print(node *p)
+// {
+
+//     if (p)
+//     {
+//         cout << p->data << " " << endl;
+//         print(p->left);
+//         cout << p->left->data << " " << p->right->data << endl;
+//         print(p->right);
+//     }
+// }
+void print(node *p, int l)
 {
-    if (p)
+    if (p != NULL)
     {
-        print(p->left);
-        cout << p->data << " ";
-        print(p->right);
+
+        if (p->left)
+            print(p->left, l + 4);
+        cout << p->data << "\n ";
+        if (p->right)
+            print(p->right, l + 4);
+
+        if (l)
+        {
+            std::cout << setw(l) << ' ';
+        }
     }
 }
 
@@ -68,7 +88,6 @@ int tree_height(node *p)
 void showInfo(node *root)
 {
     cout << "size: " << check_size(root) << " sum: " << check_sum(root) << " height: " << tree_height(root) + 1 << " mid_height: " << mid_hight(root) << endl;
-    print(root);
 }
 //исдп
 void ISDP(int L, int R, node *&p, int *a)
@@ -105,14 +124,14 @@ void serch(node *p, int x)
     }
 
     if (p)
-        cout << "Vershina naidena po adresy " << p << endl;
+        cout << "Vershina " << p->data << " naidena po adresy " << p << endl;
     else
         cout << "Vershini net v dereve" << endl;
 }
 int main()
 {
 
-    const int n = 100;
+    const int n = 15;
     int arr[n];
     for (int i = 0; i < n; ++i)
     {
@@ -120,8 +139,8 @@ int main()
     }
     node *p = NULL;
 
-    ISDP(0, 99, p, arr);
-
+    ISDP(0, 14, p, arr);
+    print(p, 0);
     int x;
     cin >> x;
     serch(p, x);
